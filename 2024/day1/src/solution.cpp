@@ -19,7 +19,9 @@ std::tuple<std::vector<int>, std::vector<int>> parseInput(const std::string &fil
         std::exit(1);
     }
 
-    std::vector<int> list1, list2;
+    std::tuple<std::vector<int>, std::vector<int>> lists;
+    std::vector<int> &list1 = std::get<0>(lists);
+    std::vector<int> &list2 = std::get<1>(lists);
     int num1, num2;
     std::string line;
     while (std::getline(file, line)) {
@@ -37,7 +39,7 @@ std::tuple<std::vector<int>, std::vector<int>> parseInput(const std::string &fil
         }
     }
     
-    return {list1, list2};
+    return lists;
 }
 
 /*
@@ -95,8 +97,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    std::vector<int> list1, list2;
-    std::tie(list1, list2) = parseInput(argv[1]);
+    auto [list1, list2] = parseInput(argv[1]);
     assert(list1.size() == list2.size() && "Error: Lists are not of equal length.");
 
     uint64_t sum1 = partA(list1, list2);
