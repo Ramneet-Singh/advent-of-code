@@ -164,4 +164,6 @@ int main(int argc, char *argv[]) {
     file.seekg(0);
     result = partB(file);
     std::cout << "Part B: " << result << "\n";
+
+    return 0;
 }
